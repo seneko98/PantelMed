@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BroDiagnostic</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--tg-theme-bg-color, #1a1a1a);
+            color: var(--tg-theme-text-color, #ffffff);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .app {
+            min-height: 100vh;
+            padding: 20px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* Головне меню */
+        .menu-container {
+            padding: 20px 0;
+        }
+
+        .app-title {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--tg-theme-text-color, #ffffff);
+            background: linear-gradient(45deg, #0088cc, #00aaff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .app-subtitle {
+            text-align: center;
+            color: var(--tg-theme-hint-color, #999);
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .menu-item {
+            background-color: var(--tg-theme-secondary-bg-color, #2d2d2d);
+            border: 1px solid var(--tg-theme-section-separator-color, #404040);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .menu-item:hover:not(.disabled) {
+            background-color: var(--tg-theme-section-bg-color, #3d3d3d);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
+        }
+
+        .menu-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .menu-icon {
+            font-size: 36px;
+        }
+
+        .menu-title {
+            font-size: 14px;
+            text-align: center;
+            color: var(--tg-theme-text-color, #ffffff);
+            font-weight: 500;
+        }
+
+        .coming-soon {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 10px;
+            background-color: var(--tg-theme-hint-color, #444);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: white;
+        }
+
+        /* Форма профілю */
+        .profile-form {
+            background-color: var(--tg-theme-secondary-bg-color, #2d2d2d);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .profile-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--tg-theme-text-color, #ffffff);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background-color: var(--tg-theme-bg-color, #1a1a1a);
+            border: 1px solid var(--tg-theme-section-separator-color, #404040);
+            border-radius: 8px;
+            color: var(--tg-theme-text-color, #ffffff);
+            font-size: 16px;
+        }
+
+        .input-field option {
+            background-color: var(--tg-theme-bg-color, #1a1a1a);
+            color: var(--tg-theme-text-color, #ffffff);
+        }
+
+        .continue-button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--tg-theme-button-color, #0088cc);
+            color: var(--tg-theme-button-text-color, white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .continue-button:hover:not(:disabled) {
+            background-color: #0077bb;
+            transform: translateY(-1px);
+        }
+
+        .continue-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Екран тестування */
+        .test-screen {
+            padding: 20px 0;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background-color: var(--tg-theme-section-separator-color, #404040);
+            border-radius: 2px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0088cc, #00aaff);
+            transition: width 0.3s ease;
+        }
+
+        .block-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .block-header h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--tg-theme-text-color, #ffffff);
+        }
+
+        .block-description {
+            color: var(--tg-theme-hint-color, #999);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .progress-text {
+            color: var(--tg-theme-hint-color, #666);
+            font-size: 12px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .questions-container {
+            margin-bottom: 30px;
+        }
+
+        .question-block {
+            background-color: var(--tg-theme-secondary-bg-color, #2d2d2d);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--tg-theme-button-color, #0088cc);
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--tg-theme-text-color, #ffffff);
+        }
+
+        .answer-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .answer-button {
+            flex: 1;
+            min-width: 80px;
+            padding: 12px;
+            background-color: var(--tg-theme-bg-color, #1a1a1a);
+            border: 1px solid var(--tg-theme-section-separator-color, #404040);
+            border-radius: 8px;
+            color: var(--tg-theme-text-color, #ffffff);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .answer-button:hover {
+            background-color: var(--tg-theme-section-bg-color, #3d3d3d);
+            transform: translateY(-1px);
+        }
+
+        .answer-button.selected {
+            background-color: var(--tg-theme-button-color, #0088cc);
+            border-color: var(--tg-theme-button-color, #0088cc);
+            color: var(--tg-theme-button-text-color, white);
+        }
+
+        .option-comment {
+            display: block;
+            font-size: 11px;
+            color: var(--tg-theme-hint-color, #aaa);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: var(--tg-theme-bg-color, #1a1a1a);
+            border: 1px solid var(--tg-theme-section-separator-color, #404040);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .checkbox-option:hover {
+            background-color: var(--tg-theme-section-bg-color, #3d3d3d);
+        }
+
+        .checkbox-option input {
+            margin-right: 10px;
+            accent-color: var(--tg-theme-button-color, #0088cc);
+        }
+
+        /* Результати */
+        .results-screen {
+            padding: 20px 0;
+        }
+
+        .results-screen h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--tg-theme-text-color, #ffffff);
+        }
+
+        .user-info {
+            background-color: var(--tg-theme-secondary-bg-color, #2d2d2d);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .user-info h3 {
+            margin-bottom: 5px;
+            color: var(--tg-theme-text-color, #ffffff);
+        }
+
+        .user-info p {
+            color: var(--tg-theme-hint-color, #999);
+            font-size: 14px;
+        }
+
+        .dominant-result {
+            background: linear-gradient(135deg, var(--tg-theme-secondary-bg-color, #2d2d2d), var(--tg-theme-section-bg-color, #3d3d3d));
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 2px solid var(--tg-theme-button-color, #0088cc);
+        }
+
+        .dominant-card {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .dominant-emoji {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .score-bar {
+            height: 8px;
+            background-color: var(--tg-theme-section-separator-color, #404040);
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+            transition: width 0.5s ease;
+        }
+
+        .score-fill.good {
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+        }
+
+        .score-fill.warning {
+            background: linear-gradient(90deg, #ff9800, #ffc107);
+        }
+
+        .score-fill.danger {
+            background: linear-gradient(90deg, #f44336, #e57373);
+        }
+
+        .percentage {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        .all-results {
+            background-color: var(--tg-theme-secondary-bg-color, #2d2d2d);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .result-category {
+            margin-bottom: 25px;
+        }
+
+        .result-category h4 {
+            margin-bottom: 15px;
+            color: var(--tg-theme-button-color, #0088cc);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .result-item {
+            margin-bottom: 15px;
+            background-color: var(--tg-theme-bg-color, #1a1a1a);
+            padding: 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .result-item:hover {
+            transform: translateX(5px);
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .result-name {
+            font-size: 14px;
+            color: var(--tg-theme-text-color, #ffffff);
+        }
+
+        .result-percentage {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .result-percentage.good {
+            color: #4caf50;
+        }
+
+        .result-percentage.warning {
+            color: #ff9800;
+        }
+
+        .result-percentage.danger {
+            color: #f44336;
+        }
+
+        .score-bar-small {
+            height: 4px;
+            background-color: var(--tg-theme-section-separator-color, #404040);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .back-to-menu {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--tg-theme-secondary-bg-color, #404040);
+            color: var(--tg-theme-text-color, white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-menu:hover {
+            background-color: #505050;
+            transform: translateY(-1px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Анімації */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-block {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .app {
+                padding: 10px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .answer-options {
+                flex-direction: column;
+            }
+            
+            .answer-button {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Головне меню -->
+        <div id="menu-screen" class="screen">
+            <div class="menu-container">
+                <h1 class="app-title">BroDiagnostic</h1>
+                <p class="app-subtitle">Медична платформа для чоловічого здоров'я</p>
+                
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="startTest()">
+                        <span class="menu-icon">🧬</span>
+                        <span class="menu-title">Тест оцінка систем здоров'я</span>
+                    </div>
+                    <div class="menu-item disabled">
+                        <span class="menu-icon">📊</span>
+                        <span class="menu-title">Інтерпретація аналізів</span>
+                        <span class="coming-soon">Скоро</span>
+                    </div>
+                    <div class="menu-item" onclick="showResults()">
+                        <span class="menu-icon">📈</span>
+                        <span class="menu-title">Мої результати</span>
+                    </div>
+                    <div class="menu-item disabled">
+                        <span class="menu-icon">🏋️</span>
+                        <span class="menu-title">Тренування</span>
+                        <span class="coming-soon">Скоро</span>
+                    </div>
+                    <div class="menu-item disabled">
+                        <span class="menu-icon">🥗</span>
+                        <span class="menu-title">Персональна дієта</span>
+                        <span class="coming-soon">Скоро</span>
+                    </div>
+                    <div class="menu-item disabled">
+                        <span class="menu-icon">💊</span>
+                        <span class="menu-title">Фарма</span>
+                        <span class="coming-soon">Скоро</span>
+                    </div>
+                    <div class="menu-item disabled">
+                        <span class="menu-icon">📚</span>
+                        <span class="menu-title">Чоловічі гайди</span>
+                        <span class="coming-soon">Скоро</span>
+                    </div>
+                    <div class="menu-item disabled">
+                        <span class="menu-icon">🛒</span>
+                        <span class="menu-title">Магазин БАДів</span>
+                        <span class="coming-soon">Скоро</span>
+                    </div>
+                    <div class="menu-item disabled">
+                        <span class="menu-icon">👨‍⚕️</span>
+                        <span class="menu-title">Запис на консультацію</span>
+                        <span class="coming-soon">Скоро</span>
+                    </div>
+                    <div class="menu-item disabled">
+                        <span class="menu-icon">🤖</span>
+                        <span class="menu-title">AI асистент</span>
+                        <span class="coming-soon">Скоро</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Екран профілю -->
+        <div id="profile-screen" class="screen hidden">
+            <div class="profile-form">
+                <h2>👤 Персональні дані</h2>
+                
+                <input type="text" id="userName" placeholder="Ваше ім'я" class="input-field">
+                
+                <select id="userAge" class="input-field">
+                    <option value="">Виберіть вік</option>
+                    <option value="До 25">До 25 років</option>
+                    <option value="25-35">25-35 років</option>
+                    <option value="36-45">36-45 років</option>
+                    <option value="46-60">46-60 років</option>
+                    <option value="60+">60+ років</option>
+                </select>
+                
+                <select id="userGender" class="input-field">
+                    <option value="">Стать</option>
+                    <option value="male">Чоловік</option>
+                    <option value="female">Жінка</option>
+                </select>
+
+                <select id="userBodyType" class="input-field">
+                    <option value="">Тип статури</option>
+                    <option value="thin">Худий</option>
+                    <option value="normal">Середній</option>
+                    <option value="athletic">Спортивний</option>
+                    <option value="overweight">Повний</option>
+                </select>
+
+                <input type="number" id="userHeight" placeholder="Зріст (см)" class="input-field" min="100" max="250">
+                <input type="number" id="userWeight" placeholder="Вага (кг)" class="input-field" min="30" max="200">
+                
+                <button class="continue-button" onclick="startTestQuestions()">
+                    Почати тестування 🚀
+                </button>
+            </div>
+        </div>
+
+        <!-- Екран тестування -->
+        <div id="test-screen" class="screen hidden">
+            <div class="test-screen">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                
+                <div class="block-header">
+                    <h2 id="blockTitle"></h2>
+                    <p class="block-description" id="blockDescription"></p>
+                    <span class="progress-text" id="progressText"></span>
+                </div>
+                
+                <div class="questions-container" id="questionsContainer">
+                    <!-- Питання будуть додаватися динамічно -->
+                </div>
+                
+                <button class="continue-button" id="nextButton" onclick="nextBlock()" disabled>
+                    Далі ➡️
+                </button>
+            </div>
+        </div>
+
+        <!-- Екран результатів -->
+        <div id="results-screen" class="screen hidden">
+            <div class="results-screen">
+                <h2>🎯 Результати комплексного тестування</h2>
+                
+                <div class="user-info" id="userInfoResults">
+                    <!-- Інформація про користувача -->
+                </div>
+                
+                <div class="dominant-result" id="dominantResult">
+                    <!-- Домінуючий нейромедіатор -->
+                </div>
+                
+                <div class="all-results" id="allResults">
+                    <!-- Всі результати -->
+                </div>
+                
+                <button class="back-to-menu" onclick="backToMenu()">
+                    🏠 Повернутися до меню
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Глобальні змінні
+        let currentScreen = 'menu';
+        let currentBlock = 0;
+        let answers = {};
+        let userProfile = {
+            name: '',
+            age: '',
+            gender: '',
+            bodyType: '',
+            height: '',
+            weight: ''
+        };
+
+        // Ініціалізація Telegram WebApp
+        let tg = window.Telegram?.WebApp;
+        if (tg) {
+            tg.ready();
+            tg.expand();
+            tg.MainButton.hide();
+            tg.BackButton.show();
+            
+            // Обробка кнопки "Назад"
+            tg.BackButton.onClick(() => {
+                if (currentScreen === 'test' && currentBlock > 0) {
+                    currentBlock--;
+                    showTestBlock();
+                } else if (currentScreen !== 'menu') {
+                    backToMenu();
+                }
+            });
+        }
+
+        // Блоки здоров'я (спрощена версія)
+        const healthBlocks = {
+            serotonin: {
+                name: 'Серотонін',
+                emoji: '😌',
+                title: '🧠 СЕРОТОНІН - нейромедіатор настрою та емоцій',
+                description: 'регулює настрій, сон, апетит, відчуття задоволення і соціальну поведінку',
+                type: 'neurotransmitter',
+                questions: [
+                    { id: 'ser_1', text: 'Я часто почуваюся емоційно виснаженим або пригніченим.' },
+                    { id: 'ser_2', text: 'Я маю знижену здатність радіти простим речам.' },
+                    { id: 'ser_3', text: 'Мені важко розслабитися, я часто відчуваю напруження.' },
+                    { id: 'ser_4', text: 'Я маю проблеми зі сном (важко заснути або часто прокидаюся).' },
+                    { id: 'ser_5', text: 'Я часто уникаю соціальних контактів, навіть із близькими.' }
+                ]
+            },
+            dopamine: {
+                name: 'Дофамін',
+                emoji: '🎯',
+                title: '🧠 ДОФАМІН - нейромедіатор мотивації та задоволення',
+                description: 'відповідає за мотивацію, винагороду, зосередженість та здатність відчувати задоволення',
+                type: 'neurotransmitter',
+                questions: [
+                    { id: 'dop_1', text: 'У мене часто бракує енергії та бажання щось починати.' },
+                    { id: 'dop_2', text: 'Я відкладаю справи на потім, навіть важливі.' },
+                    { id: 'dop_3', text: 'Мені нецікаво досягати нових цілей або підкорювати вершини.' },
+                    { id: 'dop_4', text: 'Я швидко втрачаю інтерес до нових справ.' },
+                    { id: 'dop_5', text: 'У мене знижене сексуальне бажання.' }
+                ]
+            },
+            sleep: {
+                name: 'Сон',
+                emoji: '😴',
+                title: '😴 СОН - основа відновлення та гормонального балансу',
+                description: 'забезпечує відновлення нервової системи, регенерацію тканин та балансування гормонів',
+                type: 'system',
+                questions: [
+                    { id: 'sle_1', text: 'Мені важко заснути або часто прокидаюсь вночі' },
+                    { id: 'sle_2', text: 'Відчуваю "розбитість" вранці після сну' },
+                    { id: 'sle_3', text: 'Мій сон поверхневий, з обривками снів або без них' },
+                    { id: 'sle_4', text: 'Не висипаюсь, навіть якщо сплю достатню кількість годин' },
+                    { id: 'sle_5', text: 'Відчуваю тривогу або дискомфорт перед сном' }
+                ]
+            }
+        };
+
+        // Функції навігації
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+            currentScreen = screenId.replace('-screen', '');
+        }
+
+        function startTest() {
+            showScreen('profile-screen');
+        }
+
+        function startTestQuestions() {
+            // Зберігаємо дані профілю
+            userProfile.name = document.getElementById('userName').value;
+            userProfile.age = document.getElementById('userAge').value;
+            userProfile.gender = document.getElementById('userGender').value;
+            userProfile.bodyType = document.getElementById('userBodyType').value;
+            userProfile.height = document.getElementById('userHeight').value;
+            userProfile.weight = document.getElementById('userWeight').value;
+
+            // Перевіряємо заповненість
+            if (!userProfile.name || !userProfile.age || !userProfile.gender || 
+                !userProfile.bodyType || !userProfile.height || !userProfile.weight) {
+                alert('Будь ласка, заповніть всі поля!');
+                return;
+            }
+
+            currentBlock = 0;
+            showScreen('test-screen');
+            showTestBlock();
+        }
+
+        function showTestBlock() {
+            const blockKeys = Object.keys(healthBlocks);
+            
+            if (currentBlock >= blockKeys.length) {
+                showResults();
+                return;
+            }
+
+            const blockKey = blockKeys[currentBlock];
+            const blockData = healthBlocks[blockKey];
+            
+            // Оновлюємо прогрес
+            const progress = ((currentBlock + 1) / blockKeys.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `📍 Прогрес: ${currentBlock + 1}/${blockKeys.length}`;
+            
+            // Оновлюємо заголовок
+            document.getElementById('blockTitle').textContent = blockData.title;
+            document.getElementById('blockDescription').textContent = blockData.description;
+            
+            // Генеруємо питання
+            const questionsContainer = document.getElementById('questionsContainer');
+            questionsContainer.innerHTML = '';
+            
+            blockData.questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-block';
+                questionDiv.innerHTML = `
+                    <p class="question-text">
+                        Питання ${index + 1}/${blockData.questions.length}: ${question.text}
+                    </p>
+                    <div class="answer-options">
+                        <button class="answer-button" onclick="selectAnswer('${question.id}', 0)" data-question="${question.id}" data-value="0">
+                            Так
+                        </button>
+                        <button class="answer-button" onclick="selectAnswer('${question.id}', 1)" data-question="${question.id}" data-value="1">
+                            Інколи
+                        </button>
+                        <button class="answer-button" onclick="selectAnswer('${question.id}', 2)" data-question="${question.id}" data-value="2">
+                            Ні
+                        </button>
+                    </div>
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+            
+            // Оновлюємо кнопку
+            const nextButton = document.getElementById('nextButton');
+            nextButton.textContent = currentBlock === blockKeys.length - 1 ? 'Завершити тест 🎯' : 'Далі ➡️';
+            nextButton.disabled = true;
+            
+            checkAllAnswered();
+        }
+
+        function selectAnswer(questionId, value) {
+            answers[questionId] = value;
+            
+            // Оновлюємо вигляд кнопок
+            const buttons = document.querySelectorAll(`[data-question="${questionId}"]`);
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            
+            const selectedButton = document.querySelector(`[data-question="${questionId}"][data-value="${value}"]`);
+            selectedButton.classList.add('selected');
+            
+            checkAllAnswered();
+        }
+
+        function checkAllAnswered() {
+            const blockKeys = Object.keys(healthBlocks);
+            const blockKey = blockKeys[currentBlock];
+            const blockData = healthBlocks[blockKey];
+            
+            const allAnswered = blockData.questions.every(q => answers[q.id] !== undefined);
+            document.getElementById('nextButton').disabled = !allAnswered;
+        }
+
+        function nextBlock() {
+            currentBlock++;
+            showTestBlock();
+        }
+
+        function showResults() {
+            showScreen('results-screen');
+            calculateAndDisplayResults();
+        }
+
+        function calculateAndDisplayResults() {
+            const results = {};
+            
+            // Розрахунок результатів
+            Object.entries(healthBlocks).forEach(([key, data]) => {
+                let score = 0;
+                let maxScore = 0;
+                
+                data.questions.forEach(q => {
+                    maxScore += 2;
+                    score += answers[q.id] || 0;
+                });
+                
+                results[key] = {
+                    score,
+                    maxScore,
+                    percentage: maxScore > 0 ? (score / maxScore) * 100 : 0,
+                    ...data
+                };
+            });
+
+            // Відображення інформації користувача
+            const bmi = userProfile.weight && userProfile.height 
+                ? (userProfile.weight / Math.pow(userProfile.height / 100, 2)).toFixed(1)
+                : null;
+
+            const userInfoHTML = `
+                <h3>👤 ${userProfile.name}</h3>
+                <p>Вік: ${userProfile.age} | Стать: ${userProfile.gender === 'male' ? 'Чоловік' : 'Жінка'}</p>
+                ${bmi ? `<p>ІМТ: ${bmi} (${getBMICategory(bmi)})</p>` : ''}
+            `;
+            document.getElementById('userInfoResults').innerHTML = userInfoHTML;
+
+            // Знаходження домінуючого нейромедіатора
+            const neurotransmitterResults = Object.entries(results).filter(([_, r]) => r.type === 'neurotransmitter');
+            
+            if (neurotransmitterResults.length > 0) {
+                const dominantNT = neurotransmitterResults.reduce((prev, current) => 
+                    current[1].percentage > prev[1].percentage ? current : prev
+                );
+
+                const dominantHTML = `
+                    <h3>✅ Домінуючий нейромедіатор:</h3>
+                    <div class="dominant-card">
+                        <span class="dominant-emoji">${dominantNT[1].emoji}</span>
+                        <h4>${dominantNT[1].name}</h4>
+                        <p>${dominantNT[1].description}</p>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: ${dominantNT[1].percentage}%"></div>
+                        </div>
+                        <span class="percentage">${Math.round(dominantNT[1].percentage)}%</span>
+                    </div>
+                `;
+                document.getElementById('dominantResult').innerHTML = dominantHTML;
+            }
+
+            // Всі результати
+            let allResultsHTML = '<h3>📊 Детальні результати:</h3>';
+            
+            // Групуємо за типами
+            const types = {
+                'neurotransmitter': '🧠 Нейромедіатори',
+                'system': '🏥 Системи організму'
+            };
+
+            Object.entries(types).forEach(([type, title]) => {
+                const typeResults = Object.entries(results).filter(([_, r]) => r.type === type);
+                if (typeResults.length > 0) {
+                    allResultsHTML += `<div class="result-category"><h4>${title}</h4>`;
+                    typeResults.forEach(([key, result]) => {
+                        const status = getStatusColor(result.percentage);
+                        allResultsHTML += `
+                            <div class="result-item">
+                                <div class="result-header">
+                                    <span class="result-name">${result.emoji} ${result.name}</span>
+                                    <span class="result-percentage ${status}">${Math.round(result.percentage)}%</span>
+                                </div>
+                                <div class="score-bar-small">
+                                    <div class="score-fill ${status}" style="width: ${result.percentage}%"></div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    allResultsHTML += '</div>';
+                }
+            });
+
+            document.getElementById('allResults').innerHTML = allResultsHTML;
+        }
+
+        function getBMICategory(bmi) {
+            if (bmi < 18.5) return 'Недостатня вага';
+            if (bmi < 25) return 'Нормальна вага';
+            if (bmi < 30) return 'Надмірна вага';
+            return 'Ожиріння';
+        }
+
+        function getStatusColor(percentage) {
+            if (percentage >= 75) return 'good';
+            if (percentage >= 50) return 'warning';
+            return 'danger';
+        }
+
+        function backToMenu() {
+            showScreen('menu-screen');
+            currentBlock = 0;
+            answers = {};
+        }
+
+        // Ініціалізація при завантаженні
+        document.addEventListener('DOMContentLoaded', function() {
+            showScreen('menu-screen');
+            
+            // Автоматичне заповнення імені з Telegram
+            if (tg && tg.initDataUnsafe?.user?.first_name) {
+                document.getElementById('userName').value = tg.initDataUnsafe.user.first_name;
+            }
+        });
+
+        // Валідація форми профілю
+        document.addEventListener('input', function(e) {
+            if (e.target.closest('#profile-screen')) {
+                const name = document.getElementById('userName').value;
+                const age = document.getElementById('userAge').value;
+                const gender = document.getElementById('userGender').value;
+                const bodyType = document.getElementById('userBodyType').value;
+                const height = document.getElementById('userHeight').value;
+                const weight = document.getElementById('userWeight').value;
+                
+                const allFilled = name && age && gender && bodyType && height && weight;
+                document.querySelector('#profile-screen .continue-button').disabled = !allFilled;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -61,24 +61,29 @@
             display: none;
         }
 
-        /* Головне меню */
-        .header {
+        /* Головне меню - оновлене брендування */
+        .app-branding {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-            background: linear-gradient(45deg, #0088cc, #0099ff);
+        .app-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, #0088cc, #00aaff, #4fc3f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 136, 204, 0.3);
         }
 
-        .header p {
+        .app-subtitle {
+            font-size: 12px;
             color: var(--tg-theme-hint-color, #999);
-            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
         }
 
         .menu-grid {
@@ -312,61 +317,6 @@
             text-align: center;
         }
 
-        .dominant-card {
-            background: linear-gradient(135deg, #4caf50, #45a049);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .dominant-emoji {
-            font-size: 48px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .score-bar {
-            background-color: rgba(255, 255, 255, 0.3);
-            height: 8px;
-            border-radius: 4px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-
-        .score-fill {
-            height: 100%;
-            background-color: white;
-            transition: width 0.3s ease;
-        }
-
-        .score-fill.good {
-            background-color: #4caf50;
-        }
-
-        .score-fill.warning {
-            background-color: #ff9800;
-        }
-
-        .score-fill.danger {
-            background-color: #f44336;
-        }
-
-        .percentage {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .result-category {
-            margin-bottom: 30px;
-        }
-
-        .result-category h4 {
-            color: var(--tg-theme-button-color, #0088cc);
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-
         .result-item {
             background-color: var(--tg-theme-secondary-bg-color, #2d2d2d);
             padding: 15px;
@@ -412,6 +362,18 @@
             border-radius: 3px;
             overflow: hidden;
             margin-bottom: 10px;
+        }
+
+        .score-fill.good {
+            background-color: #4caf50;
+        }
+
+        .score-fill.warning {
+            background-color: #ff9800;
+        }
+
+        .score-fill.danger {
+            background-color: #f44336;
         }
 
         /* Selling texts */
@@ -557,65 +519,29 @@
             }
         }
 
-        /* Дієти */
-        .diet-menu {
-            background-color: var(--tg-theme-secondary-bg-color, #2d2d2d);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
+        /* Фармакологія */
+        .pharma-section {
+            padding: 20px 0;
         }
 
-        .diet-card {
-            background-color: var(--tg-theme-bg-color, #1a1a1a);
-            padding: 15px;
+        .pharma-warning {
+            background-color: rgba(244, 67, 54, 0.1);
+            border: 1px solid #f44336;
             border-radius: 8px;
-            margin-bottom: 15px;
-            border-left: 4px solid #4caf50;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        .diet-card:hover {
-            transform: translateX(5px);
-            border-left-color: #2196f3;
-        }
-
-        .diet-card h4 {
-            margin: 0 0 8px 0;
-            color: var(--tg-theme-text-color, #ffffff);
-            font-size: 16px;
-        }
-
-        .diet-card p {
+        .pharma-warning h3 {
             margin: 0 0 10px 0;
-            color: var(--tg-theme-hint-color, #999);
+            color: #f44336;
+        }
+
+        .pharma-warning p {
+            margin: 0;
+            color: var(--tg-theme-text-color, #ffffff);
             font-size: 14px;
-        }
-
-        .diet-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .diet-tag {
-            background-color: var(--tg-theme-button-color, #0088cc);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-        }
-
-        .diet-card.featured {
-            border-left-color: #ff6b6b;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(238, 90, 82, 0.05));
-        }
-
-        /* Курси */
-        .course-grid {
-            display: grid;
-            gap: 15px;
-            margin: 20px 0;
         }
 
         .course-card {
@@ -623,6 +549,7 @@
             padding: 20px;
             border-radius: 12px;
             border-left: 4px solid #ff9800;
+            margin-bottom: 15px;
         }
 
         .course-card h4 {
@@ -646,6 +573,26 @@
             font-size: 18px;
         }
 
+        /* Questionnaire */
+        .questionnaire-option {
+            background-color: var(--tg-theme-bg-color, #1a1a1a);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .questionnaire-option:hover {
+            background-color: var(--tg-theme-button-color, #0088cc);
+        }
+
+        .questionnaire-option.selected {
+            background-color: var(--tg-theme-button-color, #0088cc);
+            border-color: #4caf50;
+        }
+
         /* Responsive */
         @media (max-width: 480px) {
             .app {
@@ -655,14 +602,6 @@
             .menu-grid {
                 grid-template-columns: 1fr;
                 gap: 10px;
-            }
-            
-            .answer-options {
-                flex-direction: column;
-            }
-            
-            .answer-button {
-                min-width: auto;
             }
 
             .back-button {
@@ -684,15 +623,15 @@
 
         <!-- Головне меню -->
         <div id="menu-screen" class="screen">
-            <div class="header">
-                <h1>🧬 PantelMed AI</h1>
-                <p>Розумна медична платформа в Telegram</p>
+            <div class="app-branding">
+                <h1 class="app-title">PantelMed AI</h1>
+                <p class="app-subtitle">Medical Diagnostic and Preventive Platform on Telegram</p>
             </div>
 
             <div class="menu-grid">
                 <div class="menu-item" onclick="handleMenuClick('test')">
                     <span class="menu-icon">🧬</span>
-                    <span class="menu-title">Пройти тест</span>
+                    <span class="menu-title">Тест оцінка систем здоров'я</span>
                 </div>
 
                 <div class="menu-item" onclick="handleMenuClick('cabinet')">
@@ -707,24 +646,25 @@
 
                 <div class="menu-item" onclick="handleMenuClick('pharma')">
                     <span class="menu-icon">💊💉</span>
-                    <span class="menu-title">Фармакологія</span>
+                    <span class="menu-title">Фарма</span>
                 </div>
 
                 <div class="menu-item" onclick="handleMenuClick('consultation')">
                     <span class="menu-icon">👨‍⚕️</span>
-                    <span class="menu-title">Консультація</span>
+                    <span class="menu-title">Запис на консультацію</span>
                 </div>
 
-                <div class="menu-item" onclick="handleMenuClick('interpretation')">
+                <div class="menu-item disabled">
                     <span class="menu-icon">📊</span>
                     <span class="menu-title">Інтерпретація аналізів</span>
+                    <span class="coming-soon">Скоро</span>
                 </div>
             </div>
         </div>
 
         <!-- Екран профілю -->
         <div id="profile-screen" class="screen hidden">
-            <div class="header">
+            <div class="block-header">
                 <h2>👤 Персональні дані</h2>
                 <p>Для точної діагностики потрібні ваші дані</p>
             </div>
@@ -804,14 +744,12 @@
 
         <!-- Екран результатів -->
         <div id="results-screen" class="screen hidden">
-            <div class="header">
+            <div class="block-header">
                 <h2>📊 Результати діагностики</h2>
             </div>
 
             <div id="userInfoResults" class="user-info"></div>
-            <div id="dominantResult"></div>
             <div id="allResults" class="results-container"></div>
-            <div id="upgradeSection"></div>
 
             <button onclick="backToMenu()" class="back-to-menu">
                 🏠 Повернутися до меню
@@ -850,13 +788,6 @@
                     { id: 'ser_3', text: 'Чи відчуваєте тривогу в повсякденних ситуаціях?' },
                     { id: 'ser_4', text: 'Чи маєте сильну тягу до солодкого або вуглеводів?' },
                     { id: 'ser_5', text: 'Чи втратили інтерес до занять, які раніше приносили задоволення?' }
-                ],
-                recommendations: [
-                    "Триптофан 500-1000 мг перед сном",
-                    "Вітамін D3 4000-6000 МО щодня (особливо взимку)",
-                    "Магній глицинат 400-600 мг ввечері",
-                    "Обмежити кофеїн після 14:00",
-                    "Ранкове сонце 15-20 хвилин щодня"
                 ]
             },
             dopamine: {
@@ -871,13 +802,6 @@
                     { id: 'dop_3', text: 'Чи шукаєте постійну стимуляцію (соцмережі, відео, їжа)?' },
                     { id: 'dop_4', text: 'Чи відчуваєте, що втратили здатність радіти простим речам?' },
                     { id: 'dop_5', text: 'Чи часто відкладаєте важливі справи на потім?' }
-                ],
-                recommendations: [
-                    "L-тирозин 500-1000 мг вранці натщесерце",
-                    "Фолієва кислота 800 мкг + B12 500 мкг",
-                    "Обмеження швидких задоволень (TikTok, солодке)",
-                    "Фізичні вправи 20-30 хв щодня",
-                    "Холодний душ або контрастні процедури"
                 ]
             },
             digestive_system: {
@@ -890,15 +814,8 @@
                     { id: 'dig_1', text: 'Чи маєте проблеми з травленням (здуття, гази, дискомфорт)?' },
                     { id: 'dig_2', text: 'Чи нерегулярний стілець (запори або діарея)?' },
                     { id: 'dig_3', text: 'Чи відчуваєте печію або кислотність?' },
-                    { id: 'dig_4', text: 'Чи маєте пищевую непереносимість або алергії?' },
+                    { id: 'dig_4', text: 'Чи маєте пищевою непереносимість або алергії?' },
                     { id: 'dig_5', text: 'Чи часто приймали антибіотики останнім часом?' }
-                ],
-                recommendations: [
-                    "Пробіотики 10-50 млрд КУО",
-                    "Ферменти з їжею",
-                    "L-глутамін для відновлення слизової",
-                    "Виключення глютену на 2-4 тижні",
-                    "Їжа по режиму (без перекусів)"
                 ]
             },
             rectal_parasites: {
@@ -934,13 +851,6 @@
                     { id: 'rec_6', text: 'Чи контактуєте з вуличними тваринами (гладите, підгодовуєте)?' },
                     { id: 'rec_7', text: 'Чи миєте ви овочі та фрукти перед споживанням?' },
                     { id: 'rec_8', text: 'Чи протираєте ви свій телефон антисептиком або вологими серветками хоча б раз на добу?' }
-                ],
-                recommendations: [
-                    "Перейти з туалетного паперу на біде з прохолодною водою",
-                    "Консультація проктолога при болях",
-                    "Спеціальні вправи тазом (типу Кегеля)",
-                    "Курс протипаразитарної програми: масло гарбузового насіння",
-                    "Дезінфекція телефону щовечора"
                 ]
             },
             activity: {
@@ -973,13 +883,6 @@
                     { id: 'act_3', text: 'Чи займаєтесь ви регулярними фізичними вправами?' },
                     { id: 'act_4', text: 'Чи відчуваєте ви задишку при підйомі на 2-3 поверх?' },
                     { id: 'act_5', text: 'Чи користуєтесь ви ліфтом замість сходів?' }
-                ],
-                recommendations: [
-                    "Мінімум 8 000 кроків/день для оптимального здоров'я",
-                    "Перерви кожні 45 хвилин при сидячій роботі",
-                    "Силові тренування 2–3 рази на тиждень",
-                    "Активна ходьба/легкий біг — 3–4 рази на тиждень",
-                    "При тривалому сидінні: ризик простатиту, геморою, ↓тестостерон"
                 ]
             },
             nutrition: {
@@ -1009,12 +912,6 @@
                             { text: 'Щодня / кілька разів на день', score: 0 }
                         ]
                     }
-                ],
-                recommendations: [
-                    "Білок: 1,2–2 г на 1 кг маси тіла",
-                    "Цукрозамінники: стевія, еритрит, але краще перейти на мед",
-                    "Сніданок: білок + корисні жири → стабілізація інсуліну зранку",
-                    "Питна вода: мінімум 30 мл / кг маси тіла"
                 ]
             },
             chronic: {
@@ -1042,38 +939,20 @@
                             { text: 'Немає хронічних захворювань', value: 'none' }
                         ]
                     }
-                ],
-                recommendations: [
-                    "При простатиті: тиква насіння, цинк, лікарський масаж простати",
-                    "При тонзиліті: імуномодулятори курсами, санація вогнищ інфекції",
-                    "При проблемах дихання: консультація пульмонолога, спірометрія",
-                    "При грижах: ЛФК для хребта, плавання, уникання важких навантажень",
-                    "При артрозах: хондропротектори, помірна активність, контроль ваги"
                 ]
             }
         };
 
-        // Додаткові питання для кожного блоку
-        const extraQuestions = {
-            rectal_parasites: [
-                { id: 'rec_extra_1', text: 'Чи буває біль у задньому проході при підйомі важких предметів?' },
-                { id: 'rec_extra_2', text: 'Чи є у вас свербіж у задньому проході, особливо ввечері або вночі?' },
-                { id: 'rec_extra_3', text: 'Чи помічаєте кров під час походу в туалет?' },
-                { id: 'rec_extra_4', text: 'Чи складно контролювати гази або стілець?' },
-                { id: 'rec_extra_5', text: 'Чи відчуваєте постійне відчуття неповного спорожнення?' }
-            ]
-        };
-
-        // Продающі тексти для кожної системи
+        // Продающі тексти для систем
         const systemSellingTexts = {
             serotonin: {
                 title: "😌 Серотонін - твоє щастя під контролем",
-                text: "Серотонін дає нам звичайний рівень радості, впливає на ментальне самопочуття, щастя і задоволення від життя. Не кради в себе щастя! При низькому серотоніні швидко відбувається акт еякуляції під час сексу. Підйомом серотоніну можна продовжити тривалість статевого акту.",
-                practices: ["Не читай погані новини", "Не дивись UFC/бокс надто часто", "Більше сонця та вітаміну D3", "Триптофан з їжі"]
+                text: "Серотонін дає нам звичайний рівень радості, впливає на ментальне самопочуття, щастя і задоволення від життя. Не кради в себе щастя! При низькому серотоніні швидко відбувається акт еякуляції під час сексу.",
+                practices: ["Не читай погані новини", "Більше сонця та вітаміну D3", "Триптофан з їжі", "Медитація та вдячність"]
             },
             dopamine: {
                 title: "🎯 Дофамін - твій внутрішній двигун",
-                text: "Дофамін - це те, що нас запалює! Він понижає пролактин, підвищує сексуальне бажання. Успіх в житті напряму залежить від рівня дофаміну. Це мотивація, драйв та здатність досягати цілей.",
+                text: "Дофамін - це те, що нас запалює! Він понижає пролактин, підвищує сексуальне бажання. Успіх в житті напряму залежить від рівня дофаміну.",
                 practices: ["Ставити та досягати маленькі цілі", "Займатись спортом", "Обмежити швидкі задоволення", "Здорова конкуренція"]
             },
             digestive_system: {
@@ -1085,96 +964,6 @@
                 title: "🧻 Задній прохід та паразити - інтимне здоров'я",
                 text: "Здоров'я заднього проходу та відсутність паразитів критично важливі для якості життя. Часте сидіння з телефоном → застій крові → геморой. Паразити → погане засвоєння поживних речовин → виснаження.",
                 practices: ["Біде замість туалетного паперу", "Обмеження часу в туалеті", "Регулярна дегельмінтизація", "Гігієна рук та телефону"]
-            }
-        };
-
-        // Дієти
-        const dietPlans = {
-            muscleBuild: {
-                title: '🏋️‍♂️ Дієта для набору м\'язової маси',
-                description: 'Оптимальне харчування для максимального росту м\'язів',
-                target: 'Молоді чоловіки до 35 років, активні спортсмени',
-                tags: ['Набір маси', 'Спорт', 'Чоловіки']
-            },
-            men35Plus: {
-                title: '👨‍🦳 Раціон для чоловіків 35+',
-                description: 'Збалансоване харчування для підтримки здоров\'я та форми після 35',
-                target: 'Чоловіки 35+ років, офісні працівники, помірна активність',
-                tags: ['35+', 'Здоров\'я', 'Баланс']
-            },
-            cutting: {
-                title: '🔥 Раціон для "сушки" / рекомпозиції тіла',
-                description: 'Спалювання жиру при збереженні м\'язової маси',
-                target: 'Для зниження % жиру, покращення рельєфу',
-                tags: ['Схуднення', 'Рельєф', 'Сушка']
-            },
-            womenDaily: {
-                title: '👩 Жіночий щоденний раціон',
-                description: 'Збалансоване харчування для жінок',
-                target: 'Жінки, підтримка форми, гормональний баланс',
-                tags: ['Жінки', 'Баланс', 'Здоров\'я']
-            },
-            womenGain: {
-                title: '📈 Жіноча дієта для набору ваги',
-                description: 'Здоровий набір маси для жінок',
-                target: 'Жінки з дефіцитом ваги',
-                tags: ['Жінки', 'Набір ваги', 'Здоров\'я']
-            }
-        };
-
-        // Курси фармакології
-        const pharmaCourses = {
-            basic: {
-                title: '💊 Базовий курс добавок',
-                description: 'Основні вітаміни та мінерали для підтримки здоров\'я',
-                duration: '30 днів',
-                supplements: [
-                    'Мультивітамінний комплекс',
-                    'Омега-3 (EPA/DHA)',
-                    'Вітамін D3 + K2',
-                    'Магній глицинат',
-                    'Пробіотики'
-                ],
-                price: '899 грн'
-            },
-            energy: {
-                title: '⚡ Курс для енергії та мотивації',
-                description: 'Підвищення рівня енергії та покращення когнітивних функцій',
-                duration: '45 днів',
-                supplements: [
-                    'Коензим Q10',
-                    'L-тирозин',
-                    'Родіола рожева',
-                    'Комплекс B-вітамінів',
-                    'Альфа-ліпоєва кислота'
-                ],
-                price: '1299 грн'
-            },
-            hormone: {
-                title: '💪 Гормональний баланс',
-                description: 'Підтримка здорової гормональної системи',
-                duration: '60 днів',
-                supplements: [
-                    'Цинк хелат',
-                    'Ашваганда',
-                    'DIM (дііндолілметан)',
-                    'Бор',
-                    'Фосфатидилсерин'
-                ],
-                price: '1599 грн'
-            },
-            detox: {
-                title: '🧹 Детокс та очищення',
-                description: 'Очищення організму та підтримка печінки',
-                duration: '30 днів',
-                supplements: [
-                    'NAC (N-ацетилцистеїн)',
-                    'Розторопша',
-                    'Глутатіон',
-                    'Хлорела',
-                    'Активоване вугілля'
-                ],
-                price: '1199 грн'
             }
         };
 
@@ -1251,9 +1040,6 @@
                 case 'consultation':
                     showConsultationSection();
                     break;
-                case 'interpretation':
-                    showInterpretationSection();
-                    break;
                 default:
                     showComingSoon(menuId);
             }
@@ -1311,24 +1097,14 @@
 
             const [blockKey, blockData] = availableBlocks[currentBlock];
             
-            const isExtraQuestions = answers[`${blockKey}_needs_extra`];
-            let currentQuestions;
-            
-            if (isExtraQuestions && extraQuestions[blockKey]) {
-                currentQuestions = extraQuestions[blockKey];
-            } else {
-                currentQuestions = blockData.questions;
-            }
-            
             const progress = ((currentBlock + 1) / availableBlocks.length) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('progressText').textContent = `📍 Прогрес: ${currentBlock + 1}/${availableBlocks.length}`;
             
-            const titleSuffix = isExtraQuestions ? ' (Детальний аналіз)' : '';
-            document.getElementById('blockTitle').textContent = blockData.title + titleSuffix;
+            document.getElementById('blockTitle').textContent = blockData.title;
             document.getElementById('blockDescription').textContent = blockData.description;
             
-            const filteredQuestions = currentQuestions.filter(q => 
+            const filteredQuestions = blockData.questions.filter(q => 
                 !q.genderSpecific || q.genderSpecific === userProfile.gender
             );
             
@@ -1422,16 +1198,7 @@
             const availableBlocks = getAvailableBlocks();
             const [blockKey, blockData] = availableBlocks[currentBlock];
             
-            const isExtraQuestions = answers[`${blockKey}_needs_extra`];
-            let currentQuestions;
-            
-            if (isExtraQuestions && extraQuestions[blockKey]) {
-                currentQuestions = extraQuestions[blockKey];
-            } else {
-                currentQuestions = blockData.questions;
-            }
-            
-            const filteredQuestions = currentQuestions.filter(q => 
+            const filteredQuestions = blockData.questions.filter(q => 
                 !q.genderSpecific || q.genderSpecific === userProfile.gender
             );
             
@@ -1443,40 +1210,6 @@
             });
             
             document.getElementById('nextButton').disabled = !allAnswered;
-        }
-
-        function needsExtraQuestions(blockKey, currentScore) {
-            if (blockKey === 'activity') {
-                return currentScore <= 3;
-            }
-            
-            const threshold = 5;
-            return currentScore <= threshold;
-        }
-
-        function checkForAdditionalQuestions(blockKey) {
-            const blockData = healthBlocks[blockKey];
-            let currentScore = 0;
-            
-            blockData.questions.forEach(q => {
-                if (answers[q.id] !== undefined) {
-                    currentScore += answers[q.id];
-                }
-            });
-            
-            if (needsExtraQuestions(blockKey, currentScore) && extraQuestions[blockKey] && !answers[`${blockKey}_needs_extra`]) {
-                answers[`${blockKey}_needs_extra`] = true;
-                
-                showProcessingMessage("Виявлено можливий дисбаланс. Потрібен детальніший аналіз...", 2000);
-                
-                setTimeout(() => {
-                    showTestBlock();
-                }, 2500);
-                
-                return true;
-            }
-            
-            return false;
         }
 
         function showProcessingMessage(message, duration = 2000) {
@@ -1513,39 +1246,27 @@
             });
         }
 
-        function showMultipleProcessingMessages(messages, baseDuration = 800) {
-            return new Promise(async (resolve) => {
-                for (let i = 0; i < messages.length; i++) {
-                    const duration = baseDuration + Math.random() * 400;
-                    await showProcessingMessage(messages[i], duration);
-                    
-                    if (i < messages.length - 1) {
-                        await new Promise(r => setTimeout(r, 150));
-                    }
-                }
-                resolve();
-            });
-        }
-
         async function nextBlockWithProcessing() {
-            const availableBlocks = getAvailableBlocks();
-            const [currentBlockKey, currentBlockData] = availableBlocks[currentBlock];
-            
             scrollToTop();
             
-            const needsExtra = checkForAdditionalQuestions(currentBlockKey);
-            if (needsExtra) {
-                return;
-            }
-            
             const processingMsgs = ['🧠 Аналізую відповіді...', '📊 Обробляю дані...'];
-            await showMultipleProcessingMessages(processingMsgs);
+            for (let i = 0; i < processingMsgs.length; i++) {
+                await showProcessingMessage(processingMsgs[i], 800);
+                if (i < processingMsgs.length - 1) {
+                    await new Promise(r => setTimeout(r, 150));
+                }
+            }
             
             currentBlock++;
             
-            if (currentBlock >= availableBlocks.length) {
+            if (currentBlock >= getAvailableBlocks().length) {
                 const finalMessages = ['📊 Завершую аналіз...', '🎯 Формую результати...'];
-                await showMultipleProcessingMessages(finalMessages, 1000);
+                for (let i = 0; i < finalMessages.length; i++) {
+                    await showProcessingMessage(finalMessages[i], 1000);
+                    if (i < finalMessages.length - 1) {
+                        await new Promise(r => setTimeout(r, 150));
+                    }
+                }
                 showResults();
             } else {
                 showTestBlock();
@@ -1567,14 +1288,7 @@
                 let score = 0;
                 let maxScore = 0;
                 
-                const isExtraQuestions = answers[`${key}_needs_extra`];
-                let allQuestions = data.questions;
-                
-                if (isExtraQuestions && extraQuestions[key]) {
-                    allQuestions = [...data.questions, ...extraQuestions[key]];
-                }
-                
-                const filteredQuestions = allQuestions.filter(q => 
+                const filteredQuestions = data.questions.filter(q => 
                     !q.genderSpecific || q.genderSpecific === userProfile.gender
                 );
                 
@@ -1636,8 +1350,8 @@
                                 </div>
                             ` : ''}
                             <div class="upgrade-cta">
-                                <p><strong>💎 Список аналізів і стеки добавок, підібрані для вас на основі АІ агента, чекають в розширеній версії</strong></p>
-                                <button onclick="showUpgradeOffer()" class="details-btn upgrade-cta-btn">
+                                <p><strong>💎 Персональні рекомендації та стеки добавок чекають в розширеній версії</strong></p>
+                                <button onclick="showUpgradeOffer()" class="upgrade-cta-btn">
                                     Детальніше про ${result.name}
                                 </button>
                             </div>
@@ -1647,9 +1361,39 @@
                 `;
             });
 
+            // Додаємо рекомендацію ГЗТ для чоловіків 45+
+            if (userProfile.gender === 'male' && parseInt(userProfile.age?.split('-')[0] || '25') >= 45) {
+                allResultsHTML += `
+                    <div class="result-item" style="border-left: 4px solid #9c27b0;">
+                        <div class="result-header">
+                            <span class="result-name">🧬 Рекомендація: ГЗТ</span>
+                            <span class="result-percentage warning">Перевірити</span>
+                        </div>
+                        <div class="selling-text">
+                            <h5>🧬 ГЗТ - Гормонозамісна терапія</h5>
+                            <p>З віком організм природно знижує вироблення тестостерону. Після 45 років багато чоловіків відчувають: ↓лібідо, ↓енергію, ↓м'язову масу, ↑жир у зоні живота.</p>
+                            <div class="basic-practices">
+                                <strong>✅ Що дає ГЗТ:</strong>
+                                <ul>
+                                    <li>Повернення енергії та мотивації</li>
+                                    <li>Покращення сексуальної функції</li>
+                                    <li>Нормалізація композиції тіла</li>
+                                    <li>Підтримка кісткової щільності</li>
+                                </ul>
+                            </div>
+                            <div class="upgrade-cta">
+                                <p><strong>💎 Консультація з підбору ГЗТ</strong></p>
+                                <a href="https://t.me/vladyslav_kravchukk?text=Хочу консультацію щодо ГЗТ" target="_blank" class="upgrade-cta-btn">
+                                    Записатися на консультацію
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             document.getElementById('allResults').innerHTML = allResultsHTML;
             
-            // Зберігаємо результати
             saveTestResults(userProfile, answers, results, []);
         }
 
@@ -1713,6 +1457,20 @@
                     <h2>👤 Мій кабінет</h2>
                     <p>Тест пройдено: ${formatDate(userTestResults.completionDate)}</p>
                     <p>Ваші результати збережені та доступні для перегляду.</p>
+                    
+                    <div class="course-card">
+                        <h4>💊 Персональні стеки добавок</h4>
+                        <p>На основі ваших результатів тесту</p>
+                        <ul>
+                            <li>Індивідуальний підбір добавок</li>
+                            <li>Схеми прийому та дозування</li>
+                            <li>Кореляції з вашими показниками</li>
+                        </ul>
+                        <button onclick="showPersonalizedSupplements()" class="continue-button">
+                            Переглянути мої стеки
+                        </button>
+                    </div>
+                    
                     <button onclick="showUpgradeOffer()" class="continue-button">
                         💎 Отримати детальний аналіз
                     </button>
@@ -1725,74 +1483,49 @@
             showCustomScreen(cabinetHTML);
         }
 
+        function showPersonalizedSupplements() {
+            alert('Персоналізовані стеки добавок доступні в розширеній версії. Звертайтесь до спеціаліста для індивідуального підбору.');
+        }
+
         function formatDate(isoString) {
             const date = new Date(isoString);
             return date.toLocaleDateString('uk-UA');
         }
 
         function showDietSection() {
-            const dietHTML = `
-                <div class="diet-section">
-                    <h2>🥗 Персональні дієти</h2>
-                    
-                    <div class="diet-menu">
-                        <h3>📋 Доступні дієти:</h3>
-                        
-                        ${Object.entries(dietPlans).map(([key, diet]) => `
-                            <div class="diet-card" onclick="showDietDetails('${key}')">
-                                <h4>${diet.title}</h4>
-                                <p>${diet.description}</p>
-                                <small>Для: ${diet.target}</small>
-                                <div class="diet-tags">
-                                    ${diet.tags.map(tag => `<span class="diet-tag">${tag}</span>`).join('')}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    
-                    <div class="upgrade-cta">
-                        <p>💎 Детальні плани харчування з рецептами доступні в розширеній версії</p>
-                        <button onclick="showUpgradeOffer()" class="upgrade-cta-btn">
-                            Отримати повні плани дієт
-                        </button>
-                    </div>
-                    
-                    <button onclick="backToMenu()" class="back-to-menu">
-                        🏠 Повернутися до меню
-                    </button>
-                </div>
-            `;
-            
-            showCustomScreen(dietHTML);
-        }
-
-        function showDietDetails(dietKey) {
-            const diet = dietPlans[dietKey];
-            if (!diet) return;
-            
-            alert(`Детальний план дієти "${diet.title}" доступний в розширеній версії.`);
+            showComingSoon('Персональні дієти');
         }
 
         function showPharmaSection() {
             const pharmaHTML = `
                 <div class="pharma-section">
-                    <h2>💊💉 Фармакологія та добавки</h2>
+                    <h2>💊💉 Фармакологія</h2>
                     
-                    <div class="course-grid">
-                        ${Object.entries(pharmaCourses).map(([key, course]) => `
-                            <div class="course-card">
-                                <h4>${course.title}</h4>
-                                <p>${course.description}</p>
-                                <ul>
-                                    ${course.supplements.map(supp => `<li>${supp}</li>`).join('')}
-                                </ul>
-                                <p><strong>Тривалість:</strong> ${course.duration}</p>
-                                <div class="course-price">${course.price}</div>
-                                <button onclick="orderCourse('${key}')" class="continue-button">
-                                    Замовити курс
-                                </button>
-                            </div>
-                        `).join('')}
+                    <div class="pharma-warning">
+                        <h3>⚠️ Важливо!</h3>
+                        <p>Всі фармакологічні препарати повинні призначатися тільки лікарем після обстеження!</p>
+                    </div>
+                    
+                    <div class="course-card" onclick="showSteroidCourses()">
+                        <h4>💉 Стероїдні курси</h4>
+                        <p>Інформація виключно для ознайомлення</p>
+                        <ul>
+                            <li>Персональний підбір курсу</li>
+                            <li>Каталог готових курсів</li>
+                            <li>Безпека та ПКТ</li>
+                        </ul>
+                        <div class="course-price">від 900 грн</div>
+                    </div>
+                    
+                    <div class="course-card" onclick="showHRTInfo()">
+                        <h4>🧬 ГЗТ - Гормонозамісна терапія</h4>
+                        <p>Для відновлення природного рівня гормонів</p>
+                        <ul>
+                            <li>Протоколи тестостерону</li>
+                            <li>Медичний супровід</li>
+                            <li>Моніторинг показників</li>
+                        </ul>
+                        <div class="course-price">Консультація 799 грн</div>
                     </div>
                     
                     <button onclick="backToMenu()" class="back-to-menu">
@@ -1804,10 +1537,308 @@
             showCustomScreen(pharmaHTML);
         }
 
-        function orderCourse(courseKey) {
-            const course = pharmaCourses[courseKey];
-            const message = `Хочу замовити курс: ${course.title}\nЦіна: ${course.price}`;
+        function showSteroidCourses() {
+            const coursesHTML = `
+                <div class="steroid-courses-section">
+                    <h2>💉 Стероїдні курси</h2>
+                    
+                    <div class="pharma-warning">
+                        <h3>⚠️ КРИТИЧНО ВАЖЛИВО!</h3>
+                        <p>Інформація виключно для ознайомлення! Використання анаболічних стероїдів без медичного нагляду небезпечно для здоров'я!</p>
+                    </div>
+                    
+                    <div class="course-selection">
+                        <h3>🎯 Оберіть варіант:</h3>
+                        
+                        <div class="course-card" onclick="showCourseQuestionnaire()">
+                            <h4>📋 Персональний підбір курсу</h4>
+                            <p>Відповідь на питання для індивідуального підбору</p>
+                            <small>Рекомендовано для новачків</small>
+                        </div>
+                        
+                        <div class="course-card" onclick="showAllCourses()">
+                            <h4>📖 Переглянути всі курси</h4>
+                            <p>Каталог готових курсів з описами</p>
+                            <small>Для досвідчених користувачів</small>
+                        </div>
+                    </div>
+                    
+                    <div class="upgrade-cta">
+                        <p>💬 Для детального підбору та супроводу:</p>
+                        <a href="https://t.me/vladyslav_kravchukk" target="_blank" class="upgrade-cta-btn">
+                            📱 Консультація спеціаліста
+                        </a>
+                    </div>
+                    
+                    <button onclick="showPharmaSection()" class="back-to-menu">
+                        ← Назад до фармакології
+                    </button>
+                </div>
+            `;
+            
+            showCustomScreen(coursesHTML);
+        }
+
+        function showCourseQuestionnaire() {
+            let currentQuestionIndex = 0;
+            let courseAnswers = {};
+            
+            const questions = [
+                {
+                    id: 'age',
+                    title: 'Ваш вік:',
+                    options: [
+                        '18-20 років (мінімальні дози)',
+                        '21-25 років (стандартні дози)',
+                        '26-35 років (повні дози)',
+                        '36-40 років (обережні дози)',
+                        '40+ років (спеціальні протоколи)'
+                    ]
+                },
+                {
+                    id: 'experience',
+                    title: 'Досвід з ААС:',
+                    options: [
+                        '0 (перший курс)',
+                        '1-2 курси',
+                        '3-5 курсів',
+                        'Більше 5 курсів'
+                    ]
+                },
+                {
+                    id: 'health',
+                    title: 'Стан здоров\'я:',
+                    options: [
+                        'Алопеція/випадіння волосся',
+                        'Проблеми з простатою',
+                        'Проблеми з печінкою',
+                        'Травми суглобів',
+                        'Немає обмежень'
+                    ]
+                },
+                {
+                    id: 'goal',
+                    title: 'Мета курсу:',
+                    options: [
+                        'Набір м\'язової маси',
+                        'Сушка/рельєф',
+                        'Збільшення сили',
+                        'Спортивні показники'
+                    ]
+                }
+            ];
+            
+            function showQuestion(index) {
+                if (index >= questions.length) {
+                    showCourseRecommendation();
+                    return;
+                }
+                
+                const question = questions[index];
+                const questionnaireHTML = `
+                    <div class="course-questionnaire-section">
+                        <h2>📋 Підбір курсу</h2>
+                        <p>Питання ${index + 1} з ${questions.length}</p>
+                        
+                        <div class="course-card">
+                            <h4>${question.title}</h4>
+                            <div class="questionnaire-options">
+                                ${question.options.map((option, optIndex) => `
+                                    <div class="questionnaire-option" onclick="selectCourseAnswer('${question.id}', '${option}', ${optIndex})">
+                                        ${option}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <button onclick="showSteroidCourses()" class="back-to-menu">
+                            ← Назад до курсів
+                        </button>
+                    </div>
+                `;
+                
+                showCustomScreen(questionnaireHTML);
+            }
+            
+            window.selectCourseAnswer = function(questionId, value, optionIndex) {
+                courseAnswers[questionId] = value;
+                
+                const options = document.querySelectorAll('.questionnaire-option');
+                options.forEach(opt => opt.classList.remove('selected'));
+                if (options[optionIndex]) {
+                    options[optionIndex].classList.add('selected');
+                }
+                
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    showQuestion(currentQuestionIndex);
+                }, 500);
+            };
+            
+            function showCourseRecommendation() {
+                let recommendedCourse = '';
+                let price = '';
+                let description = '';
+                
+                if (courseAnswers.experience === '0 (перший курс)') {
+                    recommendedCourse = '🥉 Перший курс';
+                    price = '1200-3000 грн';
+                    description = 'Безпечний старт з мінімальними ризиками';
+                } else if (courseAnswers.experience === '1-2 курси') {
+                    recommendedCourse = '🥈 Стандартний курс';
+                    price = '3200-4000 грн';
+                    description = 'Якісний набір для досвідчених';
+                } else {
+                    recommendedCourse = '🥇 Продвинутий курс';
+                    price = '6500+ грн';
+                    description = 'Для професіоналів';
+                }
+                
+                const resultHTML = `
+                    <div class="course-recommendation">
+                        <h2>🎯 Ваша рекомендація</h2>
+                        
+                        <div class="course-card">
+                            <h4>${recommendedCourse}</h4>
+                            <p>${description}</p>
+                            <div class="course-price">${price}</div>
+                        </div>
+                        
+                        <div class="upgrade-cta">
+                            <p><strong>💎 Детальна схема курсу включає:</strong></p>
+                            <ul style="text-align: left; color: white;">
+                                <li>Точні дозування та графік</li>
+                                <li>ПКТ протокол</li>
+                                <li>Необхідні аналізи</li>
+                                <li>Підтримка печінки</li>
+                                <li>Консультація спеціаліста</li>
+                            </ul>
+                            <a href="https://t.me/vladyslav_kravchukk?text=Хочу детальну схему курсу" target="_blank" class="upgrade-cta-btn">
+                                Отримати повну схему
+                            </a>
+                        </div>
+                        
+                        <button onclick="showAllCourses()" class="secondary-button">
+                            📖 Переглянути інші курси
+                        </button>
+                        
+                        <button onclick="showSteroidCourses()" class="back-to-menu">
+                            ← Назад
+                        </button>
+                    </div>
+                `;
+                
+                showCustomScreen(resultHTML);
+            }
+            
+            showQuestion(0);
+        }
+
+        function showAllCourses() {
+            const courses = [
+                {
+                    name: '🥉 ЕКОНОМ: Короткий курс (4 тижні)',
+                    price: '900-1500 грн',
+                    description: 'Турінабол або Оксанадролон',
+                    target: 'Легкий набір, швидкість-сила'
+                },
+                {
+                    name: '🥈 СТАНДАРТ: Тест + таблетки (8 тижнів)',
+                    price: '3200-4000 грн',
+                    description: 'Тестостерон + Оксанадролон',
+                    target: 'Якісний набір, сила'
+                },
+                {
+                    name: '🥇 ПРЕМІУМ: Складний курс (10-12 тижнів)',
+                    price: '6500-8000 грн',
+                    description: 'Тест + Мастерон + Турінабол',
+                    target: 'Активний набір + якість'
+                }
+            ];
+            
+            const allCoursesHTML = `
+                <div class="all-courses-section">
+                    <h2>📖 Каталог курсів</h2>
+                    
+                    ${courses.map(course => `
+                        <div class="course-card">
+                            <h4>${course.name}</h4>
+                            <p>${course.description}</p>
+                            <div class="course-price">${course.price}</div>
+                            <p><strong>Мета:</strong> ${course.target}</p>
+                            <button onclick="orderCourse('${course.name}')" class="continue-button">
+                                Детальна схема
+                            </button>
+                        </div>
+                    `).join('')}
+                    
+                    <button onclick="showCourseQuestionnaire()" class="secondary-button">
+                        📋 Персональний підбір
+                    </button>
+                    
+                    <button onclick="showSteroidCourses()" class="back-to-menu">
+                        ← Назад
+                    </button>
+                </div>
+            `;
+            
+            showCustomScreen(allCoursesHTML);
+        }
+
+        function orderCourse(courseName) {
+            const message = `Хочу отримати детальну схему курсу: ${courseName}`;
             window.open(`https://t.me/vladyslav_kravchukk?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function showHRTInfo() {
+            const hrtHTML = `
+                <div class="hrt-section">
+                    <h2>🧬 ГЗТ - Гормонозамісна терапія</h2>
+                    
+                    <div class="course-card">
+                        <h4>Що таке ГЗТ?</h4>
+                        <p>ГЗТ-Тестостерон: повернення до чоловічої норми. З віком організм природно знижує вироблення тестостерону. Після 40–45 років багато чоловіків входять у стан гіпогонадизму.</p>
+                    </div>
+                    
+                    <div class="course-card">
+                        <h4>😰 Симптоми низького тестостерону:</h4>
+                        <ul>
+                            <li>Знижується лібідо</li>
+                            <li>Падає енергія</li>
+                            <li>Зменшується м'язова маса</li>
+                            <li>Збільшується жир у зоні живота</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="course-card">
+                        <h4>✅ Що дає ГЗТ:</h4>
+                        <ul>
+                            <li>Рівень тестостерону в межах молодої норми</li>
+                            <li>Ріст мотивації, настрою</li>
+                            <li>Покращення сексуальної функції</li>
+                            <li>Підтримка кісткової щільності</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pharma-warning">
+                        <h3>⚠️ Важливо!</h3>
+                        <p>ГЗТ призначається тільки лікарем після аналізів на гормони. Це не "стероїдний курс", а медична терапія!</p>
+                    </div>
+                    
+                    <div class="upgrade-cta">
+                        <p>💬 Консультація з підбору ГЗТ:</p>
+                        <a href="https://t.me/vladyslav_kravchukk?text=Хочу консультацію щодо ГЗТ" target="_blank" class="upgrade-cta-btn">
+                            📱 Записатися на консультацію
+                        </a>
+                    </div>
+                    
+                    <button onclick="showPharmaSection()" class="back-to-menu">
+                        ← Назад до фармакології
+                    </button>
+                </div>
+            `;
+            
+            showCustomScreen(hrtHTML);
         }
 
         function showConsultationSection() {
@@ -1815,71 +1846,34 @@
                 <div class="consultation-section">
                     <h2>👨‍⚕️ Консультація спеціаліста</h2>
                     
-                    <div class="specialist-card">
-                        <h3>Владислав Кравчук</h3>
-                        <p>Спеціаліст з функціональної медицини</p>
-                        
-                        <div class="consultation-types">
-                            <div class="course-card">
-                                <h4>📞 Базова консультація</h4>
-                                <ul>
-                                    <li>Аналіз результатів тесту</li>
-                                    <li>Індивідуальні рекомендації</li>
-                                    <li>План обстежень</li>
-                                    <li>Тривалість: 45 хвилин</li>
-                                </ul>
-                                <div class="course-price">799 грн</div>
-                            </div>
-                            
-                            <div class="course-card">
-                                <h4>💎 Розширена консультація</h4>
-                                <ul>
-                                    <li>Детальний аналіз всіх систем</li>
-                                    <li>Персональний план на 3 місяці</li>
-                                    <li>Підбір добавок з схемами</li>
-                                    <li>Супровід протягом місяця</li>
-                                    <li>Тривалість: 90 хвилин</li>
-                                </ul>
-                                <div class="course-price">1299 грн</div>
-                            </div>
-                        </div>
-                        
-                        <a href="https://t.me/vladyslav_kravchukk" target="_blank" class="continue-button">
-                            📱 Написати в Telegram
-                        </a>
+                    <div class="course-card">
+                        <h4>Владислав Кравчук</h4>
+                        <p>Спеціаліст з гормональної оптимізації</p>
                     </div>
-                    
-                    <button onclick="backToMenu()" class="back-to-menu">
-                        🏠 Повернутися до меню
-                    </button>
-                </div>
-            `;
-            
-            showCustomScreen(consultationHTML);
-        }
-
-        function showInterpretationSection() {
-            const interpretationHTML = `
-                <div class="interpretation-section">
-                    <h2>📊 Інтерпретація аналізів</h2>
                     
                     <div class="course-card">
-                        <h4>🔬 Аналіз лабораторних показників</h4>
-                        <p>Професійна інтерпретація ваших аналізів крові, гормонів та інших біомаркерів</p>
+                        <h4>📞 Базова консультація - 799 грн</h4>
                         <ul>
-                            <li>Загальний аналіз крові</li>
-                            <li>Біохімічний аналіз</li>
-                            <li>Гормональна панель</li>
-                            <li>Вітаміни та мінерали</li>
-                            <li>Маркери запалення</li>
+                            <li>Аналіз результатів тесту</li>
+                            <li>Індивідуальні рекомендації</li>
+                            <li>План обстежень</li>
+                            <li>Тривалість: 45 хвилин</li>
                         </ul>
-                        <div class="course-price">599 грн</div>
-                        <p><small>Надішліть фото ваших аналізів, отримайте детальну інтерпретацію протягом 24 годин</small></p>
                     </div>
                     
-                    <a href="https://t.me/vladyslav_kravchukk?text=Хочу замовити інтерпретацію аналізів" 
-                       target="_blank" class="continue-button">
-                        📱 Замовити інтерпретацію
+                    <div class="course-card">
+                        <h4>💎 Розширена консультація - 1299 грн</h4>
+                        <ul>
+                            <li>Детальний аналіз всіх систем</li>
+                            <li>Персональний план на 3 місяці</li>
+                            <li>Підбір добавок з схемами</li>
+                            <li>Супровід протягом місяця</li>
+                            <li>Тривалість: 90 хвилин</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="https://t.me/vladyslav_kravchukk" target="_blank" class="continue-button">
+                        📱 Написати в Telegram
                     </a>
                     
                     <button onclick="backToMenu()" class="back-to-menu">
@@ -1888,7 +1882,7 @@
                 </div>
             `;
             
-            showCustomScreen(interpretationHTML);
+            showCustomScreen(consultationHTML);
         }
 
         function showUpgradeOffer() {
@@ -1913,7 +1907,7 @@
                         💳 Замовити розширену версію
                     </a>
                     
-                    <button onclick="backToMenu()" class="continue-button secondary">
+                    <button onclick="backToMenu()" class="secondary-button">
                         ← Повернутися до безкоштовної версії
                     </button>
                 </div>
@@ -1962,29 +1956,44 @@
             showScreen('menu-screen', false);
             currentBlock = 0;
             answers = {};
+            navigationHistory = [];
         }
 
         // Ініціалізація при завантаженні
         document.addEventListener('DOMContentLoaded', function() {
-            showScreen('menu-screen', false);
-            
-            if (tg && tg.initDataUnsafe?.user?.first_name) {
-                document.getElementById('userName').value = tg.initDataUnsafe.user.first_name;
+            try {
+                showScreen('menu-screen', false);
+                
+                if (tg && tg.initDataUnsafe?.user?.first_name) {
+                    const nameInput = document.getElementById('userName');
+                    if (nameInput) {
+                        nameInput.value = tg.initDataUnsafe.user.first_name;
+                    }
+                }
+            } catch (error) {
+                console.log('Initialization error:', error);
             }
         });
 
         // Валідація форми профілю
         document.addEventListener('input', function(e) {
             if (e.target.closest('#profile-screen')) {
-                const name = document.getElementById('userName').value;
-                const age = document.getElementById('userAge').value;
-                const gender = document.getElementById('userGender').value;
-                const bodyType = document.getElementById('userBodyType').value;
-                const height = document.getElementById('userHeight').value;
-                const weight = document.getElementById('userWeight').value;
-                
-                const allFilled = name && age && gender && bodyType && height && weight;
-                document.querySelector('#profile-screen .continue-button').disabled = !allFilled;
+                try {
+                    const name = document.getElementById('userName')?.value || '';
+                    const age = document.getElementById('userAge')?.value || '';
+                    const gender = document.getElementById('userGender')?.value || '';
+                    const bodyType = document.getElementById('userBodyType')?.value || '';
+                    const height = document.getElementById('userHeight')?.value || '';
+                    const weight = document.getElementById('userWeight')?.value || '';
+                    
+                    const allFilled = name && age && gender && bodyType && height && weight;
+                    const continueBtn = document.querySelector('#profile-screen .continue-button');
+                    if (continueBtn) {
+                        continueBtn.disabled = !allFilled;
+                    }
+                } catch (error) {
+                    console.log('Validation error:', error);
+                }
             }
         });
     </script>
